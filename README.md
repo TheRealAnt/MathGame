@@ -12,6 +12,10 @@
 <img width="417" alt="Screenshot 2024-03-30 at 01 56 59" src="https://github.com/TheRealAnt/MathGame/assets/22860503/17dd9e62-333f-4e1a-8aa6-ea3aabc902ac">
 </p>
 
+https://github.com/TheRealAnt/MathGame/assets/22860503/185d3898-f2e2-4a41-900e-665dd4094f23
+
+
+
 ## Features
 
 
