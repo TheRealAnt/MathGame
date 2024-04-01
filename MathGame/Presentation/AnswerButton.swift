@@ -18,18 +18,18 @@ struct AnswerButton: View {
                 .background(
                     ZStack {
                         Color.indigo
-
-                        RoundedRectangle(cornerRadius: 110/2, style: .continuous)
-                        .foregroundStyle(.cyan)
-                        .blur(radius: 4)
-                        .offset(x: -8, y: -8)
                         
                         RoundedRectangle(cornerRadius: 110/2, style: .continuous)
-                        .fill(
-                            LinearGradient(gradient: Gradient(colors: [Color.indigo, Color.cyan]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                        )
-                        .padding(2)
-                        .blur(radius: 2)
+                            .foregroundStyle(.cyan)
+                            .blur(radius: 4)
+                            .offset(x: -8, y: -8)
+                        
+                        RoundedRectangle(cornerRadius: 110/2, style: .continuous)
+                            .fill(
+                                LinearGradient(gradient: Gradient(colors: [Color.indigo, Color.cyan]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                            )
+                            .padding(2)
+                            .blur(radius: 2)
                     }
                 )
                 .foregroundColor(Color(.systemBackground))
