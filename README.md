@@ -9,15 +9,24 @@
 </p>
 
 <p align="row">
-<img width="417" alt="Screenshot 2024-01-16 at 19 01 13" src="https://github.com/TheRealAnt/MathGame/assets/22860503/163c0ddf-def0-4a21-8503-4821f72d957b">
+<img width="417" alt="Screenshot 2024-03-30 at 01 56 59" src="https://github.com/TheRealAnt/MathGame/assets/22860503/17dd9e62-333f-4e1a-8aa6-ea3aabc902ac">
 </p>
+
+https://github.com/TheRealAnt/MathGame/assets/22860503/185d3898-f2e2-4a41-900e-665dd4094f23
+
+
 
 ## Features
 
+
 - [x] Addition of 2 numbers.
 - [x] Score.
+- [x] Difficulty options. 
+- [x] Haptic feedback.
+- [x] Sounds.
+- [x] Button animations.   
 
 ## Requirements
 
-- iOS 16.0+
-- Xcode 14.3.1
+- iOS 17.0+
+- Xcode 15.2
