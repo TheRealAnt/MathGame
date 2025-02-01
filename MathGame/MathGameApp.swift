@@ -20,6 +20,8 @@ struct MathGameApp: App {
             ContentView()
             ContentView()
             ContentView()
+            ContentView()
+            ContentView()
         }
     }
 }
