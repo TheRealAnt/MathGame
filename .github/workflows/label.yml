@@ -24,13 +24,13 @@ jobs:
         run: |
          if [ ${{ env.pr_size }} -le 5 ]; then
             echo "Adding 'size: small' label"
-            gh pr label ${{ github.event.pull_request.number }} --add-label "size: small"
+            gh pr ${{ github.event.pull_request.number }} --add-label "size: small"
           elif [ ${{ env.pr_size }} -le 20 ]; then
             echo "Adding 'size: medium' label"
-            gh pr label ${{ github.event.pull_request.number }} --add-label "size: medium"
+            gh pr ${{ github.event.pull_request.number }} --add-label "size: medium"
           else
             echo "Adding 'size: large' label"
-            gh pr label ${{ github.event.pull_request.number }} --add-label "size: large"
+            gh pr ${{ github.event.pull_request.number }} --add-label "size: large"
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
