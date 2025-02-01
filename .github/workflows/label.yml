@@ -30,7 +30,7 @@ jobs:
             gh pr ${{ github.event.pull_request.number }} --add-label "size: medium"
           else
             echo "Adding 'size: large' label"
-            gh pr label ${{ github.event.pull_request.number }} --add-label "size: large"
+            gh pr ${{ github.event.pull_request.number }} --add-label "size: large"
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
