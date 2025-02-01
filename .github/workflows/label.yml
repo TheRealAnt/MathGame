@@ -19,16 +19,16 @@ jobs:
           echo "Diff Stat: $DIFF_STAT"
           
           # Extract the number of lines added and removed
-          ADDED_LINES=$(echo "$DIFF_STAT" | grep -oP '\d+(?= insertions\(\+.*\))')
-          REMOVED_LINES=$(echo "$DIFF_STAT" | grep -oP '\d+(?= deletions\(-.*\))')
+          #ADDED_LINES=$(echo "$DIFF_STAT" | grep -oP '\d+(?= insertions\(\+.*\))')
+          #REMOVED_LINES=$(echo "$DIFF_STAT" | grep -oP '\d+(?= deletions\(-.*\))')
           
           # Handle cases where no lines were added or removed
-          ADDED_LINES=${ADDED_LINES:-0}
-          REMOVED_LINES=${REMOVED_LINES:-0}
+          #ADDED_LINES=${ADDED_LINES:-0}
+          #REMOVED_LINES=${REMOVED_LINES:-0}
           
           # Calculate total lines of code changed
-          TOTAL_CHANGED=$((ADDED_LINES + REMOVED_LINES))
-          echo "Total Lines Changed: $TOTAL_CHANGED"
+          TOTAL_CHANGED=$DIFF_STAT
+          #echo "Total Lines Changed: $TOTAL_CHANGED"
           
           # Output the total lines changed for use in other steps
           echo "lines_changed=$TOTAL_CHANGED" >> $GITHUB_ENV
