@@ -12,6 +12,34 @@ struct MathGameApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            // Testing PR sizer
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
+            ContentView()
         }
     }
 }
