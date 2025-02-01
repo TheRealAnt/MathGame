@@ -15,7 +15,7 @@ jobs:
         id: lines_changed
         run: |
           # Get the diff stat between the base and head commit
-          DIFF_STAT=$(git diff --shortstat ${{ github.event.before }} ${{ github.sha }})
+          DIFF_STAT=$(git diff --shortstat ${{ github.event.before }} ${{ github.sha }}))
           echo "Diff Stat: $DIFF_STAT"
           
           # Extract the number of lines added and removed
