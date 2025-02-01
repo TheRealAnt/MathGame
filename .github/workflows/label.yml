@@ -1,4 +1,4 @@
-name: Label PR by Size
+name: Auto Label PR Size
 
 on:
   pull_request:
@@ -8,25 +8,18 @@ jobs:
   label-pr-size:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Check out the code
         uses: actions/checkout@v2
 
-      - name: Get PR size
+      - name: Calculate the number of changed files
         id: pr_size
         run: |
-          # Calculate the number of files changed in the PR
+          # Get the number of files changed in the PR
           pr_size=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | wc -l)
           echo "PR size: $pr_size files"
           echo "pr_size=$pr_size" >> $GITHUB_ENV
 
       - name: Add size label
-        uses: peter-evans/label-pull-request@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          labels: |
-            ${{ steps.pr_size.outputs.pr_size }}
-          
-      - name: Set PR label based on size
         run: |
           if [ ${{ env.pr_size }} -le 5 ]; then
             echo "Adding 'size: small' label"
@@ -38,3 +31,5 @@ jobs:
             echo "Adding 'size: large' label"
             gh pr label ${{ github.event.pull_request.number }} --add "size: large"
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
