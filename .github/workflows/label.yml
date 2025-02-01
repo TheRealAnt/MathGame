@@ -1,22 +1,40 @@
-# This workflow will triage pull requests and apply a label based on the
-# paths that are modified in the pull request.
-#
-# To use this workflow, you will need to set up a .github/labeler.yml
-# file with configuration.  For more information, see:
-# https://github.com/actions/labeler
+name: Label PR by Size
 
-name: Labeler
-on: [pull_request_target]
+on:
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
-  label:
-
+  label-pr-size:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
     steps:
-    - uses: actions/labeler@v4
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get PR size
+        id: pr_size
+        run: |
+          # Calculate the number of files changed in the PR
+          pr_size=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | wc -l)
+          echo "PR size: $pr_size files"
+          echo "pr_size=$pr_size" >> $GITHUB_ENV
+
+      - name: Add size label
+        uses: peter-evans/label-pull-request@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            ${{ steps.pr_size.outputs.pr_size }}
+          
+      - name: Set PR label based on size
+        run: |
+          if [ ${{ env.pr_size }} -le 5 ]; then
+            echo "Adding 'size: small' label"
+            gh pr label ${{ github.event.pull_request.number }} --add "size: small"
+          elif [ ${{ env.pr_size }} -le 20 ]; then
+            echo "Adding 'size: medium' label"
+            gh pr label ${{ github.event.pull_request.number }} --add "size: medium"
+          else
+            echo "Adding 'size: large' label"
+            gh pr label ${{ github.event.pull_request.number }} --add "size: large"
+          fi
