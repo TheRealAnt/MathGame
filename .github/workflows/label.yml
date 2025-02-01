@@ -22,6 +22,15 @@ jobs:
       - name: Add size label
         id: pr_size_label
         run: |
-          gh label create small --description "Something isn't working" --color E99695
+         if [ ${{ env.pr_size }} -le 5 ]; then
+            echo "Adding 'size: small' label"
+            gh pr label ${{ github.event.pull_request.number }} --add-label "size: small"
+          elif [ ${{ env.pr_size }} -le 20 ]; then
+            echo "Adding 'size: medium' label"
+            gh pr label ${{ github.event.pull_request.number }} --add-label "size: medium"
+          else
+            echo "Adding 'size: large' label"
+            gh pr label ${{ github.event.pull_request.number }} --add-label "size: large"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
