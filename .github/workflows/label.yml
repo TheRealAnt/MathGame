@@ -22,6 +22,6 @@ jobs:
       - name: Add size label
         id: pr_size_label
         run: |
-            gh pr --add-label "bug,need help"
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "bug,need help"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
