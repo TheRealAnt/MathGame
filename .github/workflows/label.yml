@@ -10,14 +10,32 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v2
-
-      - name: Calculate the number of changed files
-        id: pr_size
+        
+      - name: Calculate lines of code changed
+        id: lines_changed
         run: |
-          # Get the number of files changed in the PR
-          pr_size=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | wc -l)
-          echo "PR size: $pr_size files"
-          echo "pr_size=$pr_size" >> $GITHUB_ENV
+          # Get the diff stat between the base and head commit
+          DIFF_STAT=$(git diff --shortstat ${{ github.event.before }} ${{ github.sha }})
+          echo "Diff Stat: $DIFF_STAT"
+          
+          # Extract the number of lines added and removed
+          ADDED_LINES=$(echo "$DIFF_STAT" | grep -oP '\d+(?= insertions\(\+.*\))')
+          REMOVED_LINES=$(echo "$DIFF_STAT" | grep -oP '\d+(?= deletions\(-.*\))')
+          
+          # Handle cases where no lines were added or removed
+          ADDED_LINES=${ADDED_LINES:-0}
+          REMOVED_LINES=${REMOVED_LINES:-0}
+          
+          # Calculate total lines of code changed
+          TOTAL_CHANGED=$((ADDED_LINES + REMOVED_LINES))
+          echo "Total Lines Changed: $TOTAL_CHANGED"
+          
+          # Output the total lines changed for use in other steps
+          echo "lines_changed=$TOTAL_CHANGED" >> $GITHUB_ENV
+
+      - name: Output lines changed
+        run: |
+          echo "Total lines changed in the PR: ${{ env.lines_changed }}"
 
       - name: Add size label
         id: pr_size_label
