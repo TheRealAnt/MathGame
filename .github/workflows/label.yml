@@ -22,6 +22,12 @@ jobs:
       - name: Add size label
         id: pr_size_label
         run: |
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "bug"
+            if [ ${{ env.pr_size }} -le 5 ]; then
+           gh pr edit ${{ github.event.pull_request.number }} --add-label "Small"
+          elif [ ${{ env.pr_size }} -le 20 ]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "Medium"
+          else
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "Large"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
