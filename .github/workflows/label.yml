@@ -22,6 +22,6 @@ jobs:
       - name: Add size label
         id: pr_size_label
         run: |
-          gh label create bug --description "Something isn't working" --color E99695
+          gh label create small --description "Something isn't working" --color E99695
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
