@@ -23,6 +23,6 @@ jobs:
         id: pr_size_label
         run: |
             echo "Adding 'size: small' label"
-            gh issue ${{ github.event.pull_request.number }} --add-label "size: small"
+            gh issue ${{ github.event.pull_request.number }} --add-label "small"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
